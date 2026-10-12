@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpaceSystem xmlns="http://www.omg.org/spec/XTCE/20180204" name="LLASO_P4_DEMO">
+  <Header version="1.0" date="2026-10-11"/>
+  <TelemetryMetaData>
+    <ParameterTypeSet>
+      <IntegerParameterType name="TimestampMsType"><IntegerDataEncoding sizeInBits="64" encoding="unsigned" byteOrder="mostSignificantByteFirst"/></IntegerParameterType>
+      <FloatParameterType name="Float32Type"><FloatDataEncoding sizeInBits="32" encoding="IEEE754_1985" byteOrder="mostSignificantByteFirst"/></FloatParameterType>
+      <EnumeratedParameterType name="JointStatusType"><IntegerDataEncoding sizeInBits="8" encoding="unsigned"/><EnumerationList><Enumeration label="OK" value="0"/><Enumeration label="LIMITED" value="1"/><Enumeration label="FAULT" value="2"/></EnumerationList></EnumeratedParameterType>
+    </ParameterTypeSet>
+    <ParameterSet>
+      <Parameter name="timestamp_unix_ms" parameterTypeRef="TimestampMsType" shortDescription="UTC Unix time in milliseconds"/>
+      <Parameter name="battery_level_percent" parameterTypeRef="Float32Type" unitSet="percent"/>
+      <Parameter name="motor_current_amps" parameterTypeRef="Float32Type" unitSet="A"/>
+      <Parameter name="motor_temperature_c" parameterTypeRef="Float32Type" unitSet="degC"/>
+      <Parameter name="wheel_speed_rpm" parameterTypeRef="Float32Type" unitSet="RPM"/>
+      <Parameter name="joint_status" parameterTypeRef="JointStatusType"/>
+    </ParameterSet>
+  </TelemetryMetaData>
+</SpaceSystem>

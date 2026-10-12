@@ -1,0 +1,62 @@
+[
+  {
+    "robot_id": "P2-TRANSPORT-01",
+    "timestamp_utc": "2026-10-11T14:00:00Z",
+    "timestamp_unix_ms": 1791727200000,
+    "battery_level_percent": 86,
+    "motor_current_amps": 2.1,
+    "motor_temperature_c": 34.0,
+    "wheel_speed_rpm": 121.0,
+    "joint_status": "OK"
+  },
+  {
+    "robot_id": "P2-TRANSPORT-01",
+    "timestamp_utc": "2026-10-11T14:05:00Z",
+    "timestamp_unix_ms": 1791727500000,
+    "battery_level_percent": 85,
+    "motor_current_amps": 2.2,
+    "motor_temperature_c": 35.0,
+    "wheel_speed_rpm": 120.0,
+    "joint_status": "OK"
+  },
+  {
+    "robot_id": "P2-TRANSPORT-01",
+    "timestamp_utc": "2026-10-11T14:10:00Z",
+    "timestamp_unix_ms": 1791727800000,
+    "battery_level_percent": 84,
+    "motor_current_amps": 2.3,
+    "motor_temperature_c": 37.0,
+    "wheel_speed_rpm": 119.0,
+    "joint_status": "OK"
+  },
+  {
+    "robot_id": "P2-TRANSPORT-01",
+    "timestamp_utc": "2026-10-11T14:15:00Z",
+    "timestamp_unix_ms": 1791728100000,
+    "battery_level_percent": 82,
+    "motor_current_amps": 2.9,
+    "motor_temperature_c": 43.0,
+    "wheel_speed_rpm": 114.0,
+    "joint_status": "OK"
+  },
+  {
+    "robot_id": "P2-TRANSPORT-01",
+    "timestamp_utc": "2026-10-11T14:20:00Z",
+    "timestamp_unix_ms": 1791728400000,
+    "battery_level_percent": 80,
+    "motor_current_amps": 3.7,
+    "motor_temperature_c": 52.0,
+    "wheel_speed_rpm": 103.0,
+    "joint_status": "OK"
+  },
+  {
+    "robot_id": "P2-TRANSPORT-01",
+    "timestamp_utc": "2026-10-11T14:25:00Z",
+    "timestamp_unix_ms": 1791728700000,
+    "battery_level_percent": 78,
+    "motor_current_amps": 4.5,
+    "motor_temperature_c": 64.0,
+    "wheel_speed_rpm": 88.0,
+    "joint_status": "LIMITED"
+  }
+]
