@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   Activity,
   AlertTriangle,
@@ -15,6 +15,7 @@ import {
   Layers3,
   Menu,
   Moon,
+  Orbit,
   Radio,
   Satellite,
   Search,
@@ -40,6 +41,13 @@ const labels: Record<Severity, string> = {
   critical: "Critical",
 };
 const order: Record<Severity, number> = { good: 0, warning: 1, critical: 2 };
+type AppPage = "metric" | "alerts" | "fleet";
+const pageFromHash = (): AppPage =>
+  window.location.hash === "#fleet"
+    ? "fleet"
+    : window.location.hash === "#alerts"
+      ? "alerts"
+      : "metric";
 
 function Status({
   level,
@@ -67,6 +75,20 @@ function IconForMetric({ metric }: { metric: Metric }) {
 }
 
 function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [size, setSize] = useState({ width: 900, height: 269 });
+  useLayoutEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const resize = () => {
+      const { width, height } = svg.getBoundingClientRect();
+      if (width > 0 && height > 0) setSize({ width, height });
+    };
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(svg);
+    return () => observer.disconnect();
+  }, []);
   const values = rover.records.map((row) => row[metric.key]);
   const numeric = values.map((value) =>
     typeof value === "number"
@@ -85,10 +107,10 @@ function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
       : Math.max((maxRaw - minRaw) * 0.27, Math.abs(maxRaw) * 0.025, 0.5);
   const min = metric.type === "enum" ? -0.4 : minRaw - pad;
   const max = metric.type === "enum" ? 2.4 : maxRaw + pad;
-  const left = 52,
-    right = 856,
-    top = 22,
-    bottom = 240;
+  const left = 55,
+    right = size.width - 16,
+    top = 12,
+    bottom = size.height - 46;
   const x = (i: number) =>
     left + (i * (right - left)) / Math.max(1, numeric.length - 1);
   const y = (v: number) => bottom - ((v - min) / (max - min)) * (bottom - top);
@@ -111,10 +133,10 @@ function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
   return (
     <div className="chart-wrap">
       <svg
-        viewBox="0 0 900 286"
+        ref={svgRef}
+        viewBox={`0 0 ${size.width} ${size.height}`}
         role="img"
         aria-label={`${metric.title} readings over time for ${rover.id}`}
-        preserveAspectRatio="none"
       >
         <defs>
           <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
@@ -179,7 +201,7 @@ function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
           <text
             key={index}
             x={x(i)}
-            y={271}
+            y={size.height - 12}
             textAnchor={index === 0 ? "start" : index === 2 ? "end" : "middle"}
             className="chart-axis time-axis"
           >
@@ -616,10 +638,171 @@ function RightRail({
   );
 }
 
+function FleetPage({ onSelect }: { onSelect: (rover: Rover) => void }) {
+  return (
+    <>
+      <div className="page-heading fleet-heading">
+        <div>
+          <div className="eyebrow">
+            <span className="eyebrow-line" /> LUNAR OPERATIONS{" "}
+            <span className="slash">/</span> GARAGE
+          </div>
+          <h1>Rover Fleet</h1>
+          <p>Vehicle overview and telemetry entry point</p>
+        </div>
+        <span className="fleet-count">{rovers.length} VEHICLES</span>
+      </div>
+      <div className="fleet-intro">
+        <Orbit size={18} />
+        <div>
+          <strong>Garage workspace</strong>
+          <span>
+            Vehicle models and repair tracking will live here. Current cards
+            show recorded telemetry only.
+          </span>
+        </div>
+      </div>
+      <div className="fleet-grid">
+        {rovers.map((item, index) => {
+          const latest = item.records.at(-1)!;
+          const level = item.metrics.reduce<Severity>((highest, metric) => {
+            const next = severity(latest[metric.key], metric);
+            return order[next] > order[highest] ? next : highest;
+          }, "good");
+          return (
+            <article className="fleet-card" key={item.id}>
+              <div className="fleet-card-head">
+                <div>
+                  <span className="fleet-card-kicker">
+                    ROVER {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h2>{item.label}</h2>
+                  <span>{item.id}</span>
+                </div>
+                <Status level={level} compact />
+              </div>
+              <div
+                className="rover-render"
+                aria-label={`${item.label} model placeholder`}
+              >
+                <div className="render-grid" />
+                <svg
+                  viewBox="0 0 420 220"
+                  role="img"
+                  aria-label="Rover outline placeholder"
+                >
+                  <ellipse
+                    cx="210"
+                    cy="185"
+                    rx="150"
+                    ry="16"
+                    fill="#527da31a"
+                    stroke="#4b709144"
+                  />
+                  <path
+                    d="M52 177 L368 177 M75 190 L345 190 M110 203 L310 203"
+                    stroke="#40607a44"
+                    fill="none"
+                  />
+                  <path
+                    d={
+                      index === 0
+                        ? "M105 105 L127 80 L288 80 L316 105 L314 150 L102 150 Z"
+                        : "M120 112 L143 91 L283 91 L306 112 L296 148 L125 148 Z"
+                    }
+                    fill="#1a2632"
+                    stroke="#7799b5"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M108 112 L315 112 M128 81 L155 111 M288 81 L265 111 M144 146 L110 170 M278 146 L315 170"
+                    stroke="#496d8d"
+                    fill="none"
+                  />
+                  <path
+                    d="M128 80 L145 68 L272 68 L288 80 M190 68 L190 42 L214 42 M214 42 L228 54"
+                    stroke="#8badc9"
+                    fill="none"
+                    strokeWidth="2"
+                  />
+                  <circle
+                    cx="233"
+                    cy="54"
+                    r="8"
+                    fill="#101820"
+                    stroke="#8badc9"
+                    strokeWidth="2"
+                  />
+                  {[105, 168, 252, 315].map((cx) => (
+                    <g key={cx}>
+                      <circle
+                        cx={cx}
+                        cy="167"
+                        r="19"
+                        fill="#101820"
+                        stroke="#8badc9"
+                        strokeWidth="2"
+                      />
+                      <circle
+                        cx={cx}
+                        cy="167"
+                        r="8"
+                        fill="#283d50"
+                        stroke="#688bab"
+                      />
+                    </g>
+                  ))}
+                  <path
+                    d="M148 96 L275 96"
+                    stroke="#94bce0"
+                    strokeDasharray="4 7"
+                  />
+                </svg>
+                <span className="model-label">
+                  3D MODEL SLOT <span>·</span> CONCEPT PREVIEW
+                </span>
+              </div>
+              <div className="fleet-card-foot">
+                <div>
+                  <span>ROLE</span>
+                  <strong>{item.role}</strong>
+                </div>
+                <div>
+                  <span>TELEMETRY</span>
+                  <strong>
+                    {item.metrics.length} signals · {item.records.length}{" "}
+                    samples
+                  </strong>
+                </div>
+                <div>
+                  <span>GARAGE STATE</span>
+                  <strong>Not configured</strong>
+                </div>
+              </div>
+              <button className="fleet-open" onClick={() => onSelect(item)}>
+                Open telemetry <ArrowRight size={15} />
+              </button>
+            </article>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
 export default function App() {
   const [roverId, setRoverId] = useState(rovers[0].id);
   const [metricKey, setMetricKey] = useState(rovers[0].metrics[0].key);
-  const [page, setPage] = useState<"metric" | "alerts">("metric");
+  const [page, setPage] = useState<AppPage>(pageFromHash);
+  useEffect(() => {
+    const syncPage = () => setPage(pageFromHash());
+    window.addEventListener("hashchange", syncPage);
+    return () => window.removeEventListener("hashchange", syncPage);
+  }, []);
+  const navigate = (next: AppPage) => {
+    window.location.hash = next === "metric" ? "telemetry" : next;
+    setPage(next);
+  };
   const [navOpen, setNavOpen] = useState(false);
   const rover = rovers.find((item) => item.id === roverId)!;
   const metric =
@@ -634,7 +817,7 @@ export default function App() {
   const selectRover = (next: Rover) => {
     setRoverId(next.id);
     setMetricKey(next.metrics[0].key);
-    setPage("metric");
+    navigate("metric");
     setNavOpen(false);
   };
   return (
@@ -653,9 +836,7 @@ export default function App() {
             <span />
           </span>
           <div>
-            <strong>
-              HUNCH<span> / </span>GS
-            </strong>
+            <strong>HUNCH</strong>
             <small>LUNAR TELEMETRY</small>
           </div>
           <button
@@ -693,7 +874,7 @@ export default function App() {
                 className={`nav-item ${selected ? "active" : ""}`}
                 onClick={() => {
                   setMetricKey(item.key);
-                  setPage("metric");
+                  navigate("metric");
                   setNavOpen(false);
                 }}
               >
@@ -709,7 +890,7 @@ export default function App() {
         <button
           className={`nav-item system-nav ${page === "alerts" ? "active" : ""}`}
           onClick={() => {
-            setPage("alerts");
+            navigate("alerts");
             setNavOpen(false);
           }}
         >
@@ -730,7 +911,7 @@ export default function App() {
           </div>
         </div>
         <div className="sidebar-footer">
-          <span className="connection-dot" /> SOURCE READY{" "}
+          <span className="connection-dot" /> DATASET LOADED{" "}
           <span className="footer-version">v0.1</span>
         </div>
       </aside>
@@ -743,12 +924,16 @@ export default function App() {
           >
             <Menu size={20} />
           </button>
-          <div className="topbar-title">
+          <button
+            className={`topbar-title ${page === "fleet" ? "fleet-active" : ""}`}
+            onClick={() => navigate("fleet")}
+            aria-label="Open Rover Fleet"
+          >
             <span className="topbar-icon">
               <Satellite size={18} />
             </span>
             <span>ROVER FLEET</span>
-          </div>
+          </button>
           <div className="rover-tabs" role="tablist" aria-label="Select rover">
             {rovers.map((item) => (
               <button
@@ -788,14 +973,18 @@ export default function App() {
               ))}
             </div>
             <div className="main-inner">
-              {page === "metric" ? (
+              {page === "fleet" ? (
+                <FleetPage onSelect={selectRover} />
+              ) : page === "metric" ? (
                 <MetricPage rover={rover} metric={metric} />
               ) : (
                 <AlertsManager rover={rover} />
               )}
             </div>
           </main>
-          <RightRail rover={rover} onAlerts={() => setPage("alerts")} />
+          {page !== "fleet" && (
+            <RightRail rover={rover} onAlerts={() => navigate("alerts")} />
+          )}
         </div>
         <footer className="statusbar">
           <span>

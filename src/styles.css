@@ -3,13 +3,13 @@
 :root {
   font-family: "DM Sans", Arial, sans-serif;
   color: #eaf2ff;
-  background: #07111d;
+  background: #090b0f;
   font-synthesis: none;
-  --bg: #07111d;
-  --sidebar: #0a1522;
-  --panel: #0e1c2d;
-  --panel2: #102137;
-  --border: #20354a;
+  --bg: #090b0f;
+  --sidebar: #0c0e12;
+  --panel: #12161d;
+  --panel2: #151a22;
+  --border: #252b34;
   --muted: #7f95ad;
   --muted2: #597188;
   --blue: #69aaff;
@@ -59,7 +59,7 @@ button:disabled {
   align-items: center;
   padding: 0 21px;
   gap: 12px;
-  border-bottom: 1px solid #172a3c;
+  border-bottom: 1px solid #1b222b;
 }
 .brand-symbol {
   width: 34px;
@@ -70,7 +70,7 @@ button:disabled {
   place-items: center;
   color: #8fc2ff;
   position: relative;
-  background: #112b45;
+  background: #152233;
   transform: rotate(-8deg);
 }
 .brand-symbol svg {
@@ -127,14 +127,14 @@ button:disabled {
   margin: 0 12px;
   padding: 10px;
   border: 1px solid var(--border);
-  background: #102035;
+  background: #151a22;
   border-radius: 8px;
 }
 .workspace-avatar {
   width: 31px;
   height: 31px;
   border-radius: 6px;
-  background: #1c4674;
+  background: #213753;
   color: #add5ff;
   display: grid;
   place-items: center;
@@ -209,13 +209,13 @@ button:disabled {
   text-overflow: ellipsis;
 }
 .nav-item:hover {
-  background: #132a40;
+  background: #171e28;
   color: #fff;
 }
 .nav-item.active {
-  background: #173354;
+  background: #192635;
   color: #eaf4ff;
-  border-color: #31547a;
+  border-color: #344c67;
   box-shadow: inset 3px 0 #70b3ff;
 }
 .nav-item.active svg {
@@ -258,7 +258,7 @@ button:disabled {
   padding: 11px 8px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f2032;
+  background: #151a20;
 }
 .info-icon {
   color: #76b5ff;
@@ -312,7 +312,7 @@ button:disabled {
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: stretch;
-  background: #0a1725;
+  background: #0e1117;
 }
 .topbar-title {
   width: 203px;
@@ -321,12 +321,23 @@ button:disabled {
   align-items: center;
   gap: 10px;
   padding-left: 26px;
+  border: 0;
   border-right: 1px solid var(--border);
+  background: transparent;
+  text-align: left;
   font:
     600 10px "IBM Plex Mono",
     monospace;
   letter-spacing: 0.15em;
   color: #abc1d8;
+}
+.topbar-title:hover,
+.topbar-title.fleet-active {
+  background: #171e28;
+  color: #f1f5f9;
+}
+.topbar-title.fleet-active {
+  box-shadow: inset 0 -2px var(--blue);
 }
 .topbar-icon {
   color: #82b8fa;
@@ -363,7 +374,7 @@ button:disabled {
 .rover-tabs button.selected {
   color: #e7f2ff;
   border-color: var(--blue);
-  background: linear-gradient(0deg, #183b61a6, transparent 65%);
+  background: linear-gradient(0deg, #1c3045a6, transparent 65%);
 }
 .rover-tabs button.selected small {
   color: #8faecb;
@@ -394,8 +405,8 @@ button:disabled {
   letter-spacing: 0.1em;
   white-space: nowrap;
   padding: 8px 9px;
-  background: #112945;
-  border: 1px solid #254b71;
+  background: #172434;
+  border: 1px solid #2a435c;
   border-radius: 4px;
 }
 .session-badge span {
@@ -422,8 +433,8 @@ button:disabled {
   flex: 1;
   min-width: 0;
   background:
-    radial-gradient(ellipse at 55% -180px, #173251 0, transparent 540px),
-    #07111d;
+    radial-gradient(ellipse at 55% -180px, #151d28 0, transparent 540px),
+    #090b0f;
 }
 .main-inner {
   max-width: 1380px;
@@ -471,7 +482,7 @@ button:disabled {
   gap: 9px;
   padding: 10px 14px;
   color: #c7dff7;
-  background: #10263b;
+  background: #161d27;
   border: 1px solid #325472;
   border-radius: 6px;
   white-space: nowrap;
@@ -479,7 +490,7 @@ button:disabled {
   font-weight: 700;
 }
 .export-button:hover {
-  background: #183958;
+  background: #202d3d;
 }
 .summary-grid {
   display: grid;
@@ -490,15 +501,15 @@ button:disabled {
 .summary-card {
   min-height: 140px;
   border: 1px solid var(--border);
-  background: linear-gradient(150deg, #102238, #0b1929);
+  background: linear-gradient(150deg, #14191f, #0e1118);
   border-radius: 9px;
   padding: 18px 20px;
   position: relative;
   overflow: hidden;
 }
 .primary-summary {
-  border-color: #315777;
-  background: linear-gradient(120deg, #163859, #102439 70%);
+  border-color: #334b62;
+  background: linear-gradient(120deg, #172331, #151b25 70%);
 }
 .primary-summary:after {
   content: "";
@@ -601,7 +612,7 @@ button:disabled {
 .panel {
   border: 1px solid var(--border);
   border-radius: 9px;
-  background: #0c1b2a;
+  background: #101419;
   overflow: hidden;
 }
 .chart-panel {
@@ -635,10 +646,10 @@ button:disabled {
   white-space: nowrap;
 }
 .panel-pill {
-  border: 1px solid #2c4a64;
+  border: 1px solid #2b3949;
   padding: 8px 10px;
   border-radius: 4px;
-  background: #10263b;
+  background: #161d27;
 }
 .tiny-blue-dot {
   display: inline-block;
@@ -659,31 +670,31 @@ button:disabled {
   overflow: visible;
 }
 .chart-grid {
-  stroke: #274057;
+  stroke: #232d38;
   stroke-width: 1;
   stroke-dasharray: 4 5;
   vector-effect: non-scaling-stroke;
 }
 .chart-baseline {
-  stroke: #38536a;
+  stroke: #34404d;
   vector-effect: non-scaling-stroke;
 }
 .chart-axis {
   fill: #7791a9;
   font:
-    10px "IBM Plex Mono",
+    11px "IBM Plex Mono",
     monospace;
 }
 .time-axis {
-  font-size: 10px;
+  font-size: 11px;
 }
 .chart-halo {
-  fill: #122b41;
+  fill: #182431;
   stroke: #5785ad;
   stroke-width: 1;
 }
 .chart-point {
-  stroke: #0b1b29;
+  stroke: #0e141b;
   stroke-width: 2;
 }
 .chart-point-good {
@@ -736,7 +747,7 @@ button:disabled {
   height: 65px;
 }
 .count-pill {
-  background: #10283d;
+  background: #192331;
   padding: 7px 8px;
   border-radius: 3px;
   color: #87b5df;
@@ -751,7 +762,7 @@ table {
   font-size: 11px;
 }
 thead {
-  background: #102237;
+  background: #161c24;
 }
 th {
   padding: 13px 20px;
@@ -763,12 +774,12 @@ th {
 }
 td {
   padding: 12px 20px;
-  border-top: 1px solid #193044;
+  border-top: 1px solid #222d38;
   color: #c7d8eb;
   height: 47px;
 }
 tbody tr:hover {
-  background: #10243a;
+  background: #171f2a;
 }
 .time-cell,
 .param-cell,
@@ -807,7 +818,7 @@ tbody tr:hover {
   width: 288px;
   min-width: 288px;
   border-left: 1px solid var(--border);
-  background: #0a1827;
+  background: #0e1217;
   display: flex;
   flex-direction: column;
   padding: 22px 17px;
@@ -832,15 +843,15 @@ tbody tr:hover {
   height: 36px;
   border-radius: 8px;
   color: #7cb6ee;
-  background: #13324e;
-  border: 1px solid #2b5578;
+  background: #1a2838;
+  border: 1px solid #34506b;
   display: grid;
   place-items: center;
 }
 .health-box {
-  border: 1px solid #2b5475;
+  border: 1px solid #334e65;
   border-radius: 7px;
-  background: linear-gradient(135deg, #163654, #0f273e);
+  background: linear-gradient(135deg, #1a2735, #131e2a);
   padding: 14px;
   margin-bottom: 27px;
 }
@@ -891,7 +902,7 @@ tbody tr:hover {
   border: 1px solid;
   border-radius: 7px;
   padding: 12px 11px;
-  background: #152537;
+  background: #171c25;
 }
 .condition-critical {
   border-color: #70414d;
@@ -958,13 +969,13 @@ tbody tr:hover {
   padding: 10px 11px;
   border: 1px solid #365a79;
   border-radius: 5px;
-  background: #142e48;
+  background: #1a2736;
   color: #9dccf7;
   font-size: 11px;
   font-weight: 700;
 }
 .view-alerts:hover {
-  background: #1d4060;
+  background: #26384a;
 }
 .rail-divider {
   height: 1px;
@@ -1026,7 +1037,7 @@ tbody tr:hover {
   height: 31px;
   min-height: 31px;
   border-top: 1px solid var(--border);
-  background: #091624;
+  background: #0b0f14;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1065,7 +1076,7 @@ tbody tr:hover {
   align-items: center;
   gap: 14px;
   border: 1px solid var(--border);
-  background: #102136;
+  background: #151b23;
   border-radius: 8px;
   padding: 16px;
 }
@@ -1105,7 +1116,7 @@ tbody tr:hover {
   display: flex;
   gap: 4px;
   padding: 3px;
-  background: #091a2a;
+  background: #10151c;
   border: 1px solid var(--border);
   border-radius: 5px;
 }
@@ -1119,7 +1130,7 @@ tbody tr:hover {
   font-weight: 700;
 }
 .filter-tabs button.selected {
-  background: #1b4162;
+  background: #20344a;
   color: #c8e4ff;
 }
 .alert-list {
@@ -1132,10 +1143,10 @@ tbody tr:hover {
   align-items: center;
   gap: 14px;
   padding: 15px;
-  border: 1px solid #38506a;
+  border: 1px solid #344252;
   border-left: 3px solid;
   border-radius: 6px;
-  background: #102238;
+  background: #14191f;
 }
 .alert-row-critical {
   border-left-color: var(--red);
@@ -1181,7 +1192,7 @@ tbody tr:hover {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #16334e;
+  background: #1b2a3b;
   border: 1px solid #345a79;
   border-radius: 4px;
   color: #add3f4;
@@ -1218,6 +1229,159 @@ tbody tr:hover {
 .mobile-rover-tabs,
 .nav-backdrop {
   display: none;
+}
+.fleet-heading {
+  margin-bottom: 20px;
+}
+.fleet-count {
+  color: #a5bed6;
+  border: 1px solid #303b48;
+  background: #151b23;
+  border-radius: 4px;
+  padding: 9px 11px;
+  font:
+    600 10px "IBM Plex Mono",
+    monospace;
+  white-space: nowrap;
+}
+.fleet-intro {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border: 1px solid #2b3949;
+  border-radius: 8px;
+  background: #14191f;
+  color: #83b6e5;
+}
+.fleet-intro strong {
+  display: block;
+  color: #e8eef5;
+  font-size: 12px;
+}
+.fleet-intro span {
+  display: block;
+  color: #8d9fb1;
+  font-size: 11px;
+  margin-top: 3px;
+}
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.fleet-card {
+  min-width: 0;
+  border: 1px solid #29323c;
+  background: #11151b;
+  border-radius: 9px;
+  overflow: hidden;
+}
+.fleet-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 19px 20px 17px;
+}
+.fleet-card-kicker {
+  color: #829bb2;
+  font:
+    600 9px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.12em;
+}
+.fleet-card-head h2 {
+  margin: 7px 0 4px;
+  font-size: 21px;
+  letter-spacing: -0.025em;
+}
+.fleet-card-head div > span:last-child {
+  color: #8299ae;
+  font:
+    10px "IBM Plex Mono",
+    monospace;
+}
+.rover-render {
+  height: 244px;
+  position: relative;
+  margin: 0 14px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 1px solid #293643;
+  border-radius: 7px;
+  background: radial-gradient(circle at 50% 38%, #1e2a37, #10151c 68%);
+}
+.render-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+  background-image:
+    linear-gradient(#45617a35 1px, transparent 1px),
+    linear-gradient(90deg, #45617a35 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(transparent, black 35%, black 85%, transparent);
+}
+.rover-render svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(95%, 420px);
+  max-height: 208px;
+}
+.model-label {
+  position: absolute;
+  z-index: 2;
+  bottom: 9px;
+  left: 11px;
+  color: #9eb8cd;
+  font:
+    600 9px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.09em;
+}
+.model-label span {
+  color: #5d819e;
+}
+.fleet-card-foot {
+  display: grid;
+  grid-template-columns: 1.1fr 1.2fr 1fr;
+  gap: 8px;
+  padding: 18px 20px;
+}
+.fleet-card-foot span {
+  display: block;
+  color: #7690a8;
+  font:
+    600 9px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.06em;
+}
+.fleet-card-foot strong {
+  display: block;
+  margin-top: 6px;
+  color: #d1dce7;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.fleet-open {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 40px);
+  margin: 0 20px 20px;
+  padding: 11px 12px;
+  background: #1a2735;
+  border: 1px solid #3a526a;
+  border-radius: 5px;
+  color: #c6dff6;
+  font-size: 11px;
+  font-weight: 700;
+}
+.fleet-open:hover {
+  background: #22374c;
 }
 @media (max-width: 1350px) {
   .right-rail {
@@ -1304,7 +1468,7 @@ tbody tr:hover {
   }
   .mobile-rover-tabs button {
     border: 1px solid #345572;
-    background: #10253b;
+    background: #17212c;
     color: #96b4ce;
     border-radius: 5px;
     padding: 9px 11px;
@@ -1313,7 +1477,7 @@ tbody tr:hover {
     font-weight: 700;
   }
   .mobile-rover-tabs button.selected {
-    background: #1b4265;
+    background: #223951;
     color: #eaf5ff;
     border-color: #5d9bd7;
   }
@@ -1444,5 +1608,14 @@ tbody tr:hover {
 @media (max-width: 600px) {
   table {
     min-width: 640px;
+  }
+  .fleet-grid {
+    grid-template-columns: 1fr;
+  }
+  .fleet-card-foot {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fleet-count {
+    display: none;
   }
 }

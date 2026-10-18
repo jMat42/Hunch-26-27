@@ -1,6 +1,7 @@
 """Generate the editable SVG design frame from simple named vector layers."""
 from html import escape
 from pathlib import Path
+from palette import recolor
 
 OUT = Path(__file__).with_name("rover-dashboard.svg")
 parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-label="HUNCH lunar telemetry dashboard design frame">']
@@ -83,7 +84,7 @@ text(54, 831, "Recorded telemetry", 10, weight=700)
 text(54, 847, "Demo session · 11 Oct 2026", 8, "#7f95ad")
 line(0, 869, 225, 869)
 circle(20, 885, 4, "#39d795")
-text(31, 888, "SOURCE READY", 9, "#7f95ad", mono=True, weight=600, spacing=.7)
+text(31, 888, "DATASET LOADED", 9, "#7f95ad", mono=True, weight=600, spacing=.7)
 end()
 
 group("02-topbar-and-rover-tabs")
@@ -233,5 +234,5 @@ text(1420, 888, "UTC  /  HUNCH 26–27", 9, "#93acbf", mono=True, anchor="end")
 end()
 
 parts.append('</svg>')
-OUT.write_text('\n'.join(parts), encoding='utf-8')
+OUT.write_text(recolor('\n'.join(parts)), encoding='utf-8')
 print(OUT)

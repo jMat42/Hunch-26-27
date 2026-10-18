@@ -1,6 +1,7 @@
 """Build an editable Alerts Manager SVG from the shared dashboard frame."""
 from pathlib import Path
 import xml.etree.ElementTree as ET
+from palette import recolor
 
 SVG = "http://www.w3.org/2000/svg"
 ET.register_namespace("", SVG)
@@ -105,5 +106,5 @@ text(257, 843, "ⓘ  Thresholds are demonstration choices from main.py, not miss
 
 root.insert(3, main)
 out = Path(__file__).with_name("alerts-manager.svg")
-ET.ElementTree(root).write(out, encoding="unicode", xml_declaration=True)
+out.write_text(recolor(ET.tostring(root, encoding="unicode", xml_declaration=True)), encoding="utf-8")
 print(out)

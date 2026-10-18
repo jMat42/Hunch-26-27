@@ -1,25 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-label="HUNCH lunar telemetry dashboard design frame">
 <g id="00-background">
-<rect x="0" y="0" width="1440" height="900" rx="0" fill="#07111d" stroke="none" stroke-width="1"/>
+<rect x="0" y="0" width="1440" height="900" rx="0" fill="#090b0f" stroke="none" stroke-width="1"/>
 </g>
 <g id="01-sidebar">
-<rect x="0" y="0" width="225" height="900" rx="0" fill="#0a1522" stroke="none" stroke-width="1"/>
-<line x1="224" y1="0" x2="224" y2="900" stroke="#20354a" stroke-width="1"/>
-<line x1="0" y1="68" x2="225" y2="68" stroke="#20354a" stroke-width="1"/>
-<rect x="17" y="18" width="31" height="31" rx="9" fill="#112b45" stroke="#416b91" stroke-width="1"/>
+<rect x="0" y="0" width="225" height="900" rx="0" fill="#0c0e12" stroke="none" stroke-width="1"/>
+<line x1="224" y1="0" x2="224" y2="900" stroke="#252b34" stroke-width="1"/>
+<line x1="0" y1="68" x2="225" y2="68" stroke="#252b34" stroke-width="1"/>
+<rect x="17" y="18" width="31" height="31" rx="9" fill="#152233" stroke="#416b91" stroke-width="1"/>
 <text x="32" y="39" fill="#8fc2ff" font-family="DM Sans, Arial, sans-serif" font-size="19" font-weight="500" text-anchor="middle">◐</text>
-<text x="60" y="35" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="start">HUNCH / GS</text>
+<text x="60" y="35" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="start">HUNCH</text>
 <text x="60" y="49" fill="#7f95ad" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="500" text-anchor="start" letter-spacing="1.3">LUNAR TELEMETRY</text>
 <text x="19" y="94" fill="#7890a8" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1.2">WORKSPACE</text>
-<rect x="12" y="105" width="201" height="48" rx="7" fill="#102035" stroke="#20354a" stroke-width="1"/>
-<rect x="21" y="114" width="30" height="30" rx="5" fill="#1c4674" stroke="none" stroke-width="1"/>
+<rect x="12" y="105" width="201" height="48" rx="7" fill="#151a22" stroke="#252b34" stroke-width="1"/>
+<rect x="21" y="114" width="30" height="30" rx="5" fill="#213753" stroke="none" stroke-width="1"/>
 <text x="36" y="134" fill="#add5ff" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="middle">M1</text>
 <text x="60" y="126" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="start">Mission Control</text>
 <text x="60" y="141" fill="#7f95ad" font-family="DM Sans, Arial, sans-serif" font-size="9" font-weight="500" text-anchor="start">Surface operations</text>
-<line x1="16" y1="175" x2="209" y2="175" stroke="#20354a" stroke-width="1"/>
+<line x1="16" y1="175" x2="209" y2="175" stroke="#252b34" stroke-width="1"/>
 <text x="19" y="198" fill="#7890a8" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1">TELEMETRY PAGES</text>
 <text x="204" y="198" fill="#597188" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">05</text>
-<rect x="10" y="211" width="205" height="40" rx="6" fill="#173354" stroke="#31547a" stroke-width="1"/>
+<rect x="10" y="211" width="205" height="40" rx="6" fill="#192635" stroke="#344c67" stroke-width="1"/>
 <rect x="10" y="211" width="3" height="40" rx="0" fill="#70b3ff" stroke="none" stroke-width="1"/>
 <circle cx="30" cy="231" r="8" fill="none" stroke="#8ec3ff"/>
 <line x1="26" y1="231" x2="34" y2="231" stroke="#8ec3ff" stroke-width="1"/>
@@ -41,25 +41,25 @@
 <line x1="26" y1="415" x2="34" y2="415" stroke="#7d96b0" stroke-width="1"/>
 <text x="48" y="419" fill="#9bafc3" font-family="DM Sans, Arial, sans-serif" font-size="11" font-weight="600" text-anchor="start">Joint Status</text>
 <circle cx="197" cy="415" r="3" fill="#f5bf5f" stroke="none"/>
-<line x1="16" y1="456" x2="209" y2="456" stroke="#20354a" stroke-width="1"/>
+<line x1="16" y1="456" x2="209" y2="456" stroke="#252b34" stroke-width="1"/>
 <text x="19" y="480" fill="#7890a8" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1">SYSTEM</text>
 <text x="48" y="515" fill="#9bafc3" font-family="DM Sans, Arial, sans-serif" font-size="11" font-weight="600" text-anchor="start">Alerts Manager</text>
 <circle cx="30" cy="511" r="7" fill="none" stroke="#7d96b0"/>
 <rect x="182" y="501" width="24" height="18" rx="9" fill="#522b37" stroke="none" stroke-width="1"/>
 <text x="194" y="514" fill="#ff9ca5" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="middle">3</text>
-<rect x="12" y="811" width="201" height="50" rx="7" fill="#0f2032" stroke="#20354a" stroke-width="1"/>
+<rect x="12" y="811" width="201" height="50" rx="7" fill="#151a20" stroke="#252b34" stroke-width="1"/>
 <circle cx="34" cy="835" r="11" fill="#153b58" stroke="none"/>
 <text x="34" y="839" fill="#76b5ff" font-family="DM Sans, Arial, sans-serif" font-size="12" font-weight="500" text-anchor="middle">◉</text>
 <text x="54" y="831" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="start">Recorded telemetry</text>
 <text x="54" y="847" fill="#7f95ad" font-family="DM Sans, Arial, sans-serif" font-size="8" font-weight="500" text-anchor="start">Demo session · 11 Oct 2026</text>
-<line x1="0" y1="869" x2="225" y2="869" stroke="#20354a" stroke-width="1"/>
+<line x1="0" y1="869" x2="225" y2="869" stroke="#252b34" stroke-width="1"/>
 <circle cx="20" cy="885" r="4" fill="#39d795" stroke="none"/>
-<text x="31" y="888" fill="#7f95ad" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="0.7">SOURCE READY</text>
+<text x="31" y="888" fill="#7f95ad" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="0.7">DATASET LOADED</text>
 </g>
 <g id="02-topbar-and-rover-tabs">
-<rect x="225" y="0" width="1215" height="68" rx="0" fill="#0a1725" stroke="none" stroke-width="1"/>
-<line x1="225" y1="67" x2="1440" y2="67" stroke="#20354a" stroke-width="1"/>
-<line x1="403" y1="0" x2="403" y2="68" stroke="#20354a" stroke-width="1"/>
+<rect x="225" y="0" width="1215" height="68" rx="0" fill="#0e1117" stroke="none" stroke-width="1"/>
+<line x1="225" y1="67" x2="1440" y2="67" stroke="#252b34" stroke-width="1"/>
+<line x1="403" y1="0" x2="403" y2="68" stroke="#252b34" stroke-width="1"/>
 <text x="248" y="39" fill="#82b8fa" font-family="DM Sans, Arial, sans-serif" font-size="18" font-weight="500" text-anchor="start">◉</text>
 <text x="274" y="39" fill="#abc1d8" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="600" text-anchor="start" letter-spacing="1.3">ROVER FLEET</text>
 <rect x="409" y="0" width="177" height="68" rx="0" fill="#102b47" stroke="none" stroke-width="1"/>
@@ -70,7 +70,7 @@
 <circle cx="603" cy="29" r="4" fill="#57738f" stroke="none"/>
 <text x="616" y="30" fill="#8198ae" font-family="DM Sans, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">Survey 02</text>
 <text x="616" y="46" fill="#617a93" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="500" text-anchor="start">P2-SURVEY-02</text>
-<rect x="1150" y="21" width="122" height="27" rx="4" fill="#112945" stroke="#254b71" stroke-width="1"/>
+<rect x="1150" y="21" width="122" height="27" rx="4" fill="#172434" stroke="#2a435c" stroke-width="1"/>
 <circle cx="1161" cy="34" r="3" fill="#69aaff" stroke="none"/>
 <text x="1170" y="38" fill="#75aaec" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start">RECORDED SESSION</text>
 <text x="1420" y="38" fill="#8095ab" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">11 OCT 2026</text>
@@ -80,11 +80,11 @@
 <line x1="256" y1="95" x2="272" y2="95" stroke="#69aaff" stroke-width="1"/>
 <text x="256" y="141" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start">Battery Level</text>
 <text x="256" y="162" fill="#89a0b8" font-family="DM Sans, Arial, sans-serif" font-size="11" font-weight="500" text-anchor="start">Remaining battery charge · Mission 1 source data</text>
-<rect x="876" y="118" width="109" height="33" rx="5" fill="#10263b" stroke="#325472" stroke-width="1"/>
+<rect x="876" y="118" width="109" height="33" rx="5" fill="#161d27" stroke="#325472" stroke-width="1"/>
 <text x="931" y="138" fill="#c7dff7" font-family="DM Sans, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="middle">↓  Export CSV</text>
-<rect x="254" y="184" width="235" height="130" rx="8" fill="#163859" stroke="#315777" stroke-width="1"/>
-<rect x="502" y="184" width="235" height="130" rx="8" fill="#102238" stroke="#20354a" stroke-width="1"/>
-<rect x="750" y="184" width="235" height="130" rx="8" fill="#102238" stroke="#20354a" stroke-width="1"/>
+<rect x="254" y="184" width="235" height="130" rx="8" fill="#172331" stroke="#334b62" stroke-width="1"/>
+<rect x="502" y="184" width="235" height="130" rx="8" fill="#14191f" stroke="#252b34" stroke-width="1"/>
+<rect x="750" y="184" width="235" height="130" rx="8" fill="#14191f" stroke="#252b34" stroke-width="1"/>
 <text x="273" y="208" fill="#84a4c0" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1">LATEST READING</text>
 <text x="273" y="259" fill="#eaf2ff" font-family="IBM Plex Mono, Consolas, monospace" font-size="39" font-weight="600" text-anchor="start">78</text>
 <text x="326" y="258" fill="#92aec9" font-family="IBM Plex Mono, Consolas, monospace" font-size="15" font-weight="500" text-anchor="start">%</text>
@@ -100,39 +100,39 @@
 <text x="769" y="290" fill="#8198af" font-family="DM Sans, Arial, sans-serif" font-size="10" font-weight="500" text-anchor="start">Across 6 recorded samples</text>
 </g>
 <g id="04-signal-history-chart">
-<rect x="254" y="328" width="731" height="276" rx="8" fill="#0c1b2a" stroke="#20354a" stroke-width="1"/>
-<line x1="254" y1="385" x2="985" y2="385" stroke="#20354a" stroke-width="1"/>
+<rect x="254" y="328" width="731" height="276" rx="8" fill="#101419" stroke="#252b34" stroke-width="1"/>
+<line x1="254" y1="385" x2="985" y2="385" stroke="#252b34" stroke-width="1"/>
 <text x="274" y="349" fill="#6f92af" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1">SIGNAL HISTORY</text>
 <text x="274" y="371" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="start">Battery Level over time</text>
-<rect x="850" y="345" width="115" height="27" rx="4" fill="#10263b" stroke="#2c4a64" stroke-width="1"/>
+<rect x="850" y="345" width="115" height="27" rx="4" fill="#161d27" stroke="#2b3949" stroke-width="1"/>
 <circle cx="861" cy="358" r="3" fill="#69aaff" stroke="none"/>
 <text x="870" y="362" fill="#9fb7cd" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="start">Recorded · 25 min</text>
-<line x1="311" y1="418" x2="944" y2="418" stroke="#274057" stroke-width="1" stroke-dasharray="4 5"/>
+<line x1="311" y1="418" x2="944" y2="418" stroke="#232d38" stroke-width="1" stroke-dasharray="4 5"/>
 <text x="299" y="422" fill="#7791a9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">88</text>
-<line x1="311" y1="456" x2="944" y2="456" stroke="#274057" stroke-width="1" stroke-dasharray="4 5"/>
+<line x1="311" y1="456" x2="944" y2="456" stroke="#232d38" stroke-width="1" stroke-dasharray="4 5"/>
 <text x="299" y="460" fill="#7791a9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">84</text>
-<line x1="311" y1="494" x2="944" y2="494" stroke="#274057" stroke-width="1" stroke-dasharray="4 5"/>
+<line x1="311" y1="494" x2="944" y2="494" stroke="#232d38" stroke-width="1" stroke-dasharray="4 5"/>
 <text x="299" y="498" fill="#7791a9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">80</text>
-<line x1="311" y1="532" x2="944" y2="532" stroke="#274057" stroke-width="1" stroke-dasharray="4 5"/>
+<line x1="311" y1="532" x2="944" y2="532" stroke="#232d38" stroke-width="1" stroke-dasharray="4 5"/>
 <text x="299" y="536" fill="#7791a9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">76</text>
 <path d="M311 428 L435 440 L559 452 L683 476 L807 500 L931 524 L931 548 L311 548 Z" fill="#204c74" opacity="0.35"/>
 <path d="M311 428 L435 440 L559 452 L683 476 L807 500 L931 524" fill="none" stroke="#69aaff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="311" cy="428" r="7" fill="#122b41" stroke="#5785ad"/>
-<circle cx="311" cy="428" r="4" fill="#39d795" stroke="#0b1b29"/>
-<circle cx="435" cy="440" r="7" fill="#122b41" stroke="#5785ad"/>
-<circle cx="435" cy="440" r="4" fill="#39d795" stroke="#0b1b29"/>
-<circle cx="559" cy="452" r="7" fill="#122b41" stroke="#5785ad"/>
-<circle cx="559" cy="452" r="4" fill="#39d795" stroke="#0b1b29"/>
-<circle cx="683" cy="476" r="7" fill="#122b41" stroke="#5785ad"/>
-<circle cx="683" cy="476" r="4" fill="#39d795" stroke="#0b1b29"/>
-<circle cx="807" cy="500" r="7" fill="#122b41" stroke="#5785ad"/>
-<circle cx="807" cy="500" r="4" fill="#39d795" stroke="#0b1b29"/>
-<circle cx="931" cy="524" r="7" fill="#122b41" stroke="#5785ad"/>
-<circle cx="931" cy="524" r="4" fill="#39d795" stroke="#0b1b29"/>
+<circle cx="311" cy="428" r="7" fill="#182431" stroke="#5785ad"/>
+<circle cx="311" cy="428" r="4" fill="#39d795" stroke="#0e141b"/>
+<circle cx="435" cy="440" r="7" fill="#182431" stroke="#5785ad"/>
+<circle cx="435" cy="440" r="4" fill="#39d795" stroke="#0e141b"/>
+<circle cx="559" cy="452" r="7" fill="#182431" stroke="#5785ad"/>
+<circle cx="559" cy="452" r="4" fill="#39d795" stroke="#0e141b"/>
+<circle cx="683" cy="476" r="7" fill="#182431" stroke="#5785ad"/>
+<circle cx="683" cy="476" r="4" fill="#39d795" stroke="#0e141b"/>
+<circle cx="807" cy="500" r="7" fill="#182431" stroke="#5785ad"/>
+<circle cx="807" cy="500" r="4" fill="#39d795" stroke="#0e141b"/>
+<circle cx="931" cy="524" r="7" fill="#182431" stroke="#5785ad"/>
+<circle cx="931" cy="524" r="4" fill="#39d795" stroke="#0e141b"/>
 <text x="311" y="571" fill="#7791a9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="start">14:00</text>
 <text x="621" y="571" fill="#7791a9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="middle">14:10</text>
 <text x="944" y="571" fill="#7791a9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">14:25</text>
-<line x1="254" y1="580" x2="985" y2="580" stroke="#20354a" stroke-width="1"/>
+<line x1="254" y1="580" x2="985" y2="580" stroke="#252b34" stroke-width="1"/>
 <line x1="275" y1="592" x2="291" y2="592" stroke="#69aaff" stroke-width="2"/>
 <text x="298" y="596" fill="#8aa2b9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="start">Measured value</text>
 <circle cx="418" cy="592" r="3" fill="#39d795" stroke="none"/>
@@ -143,18 +143,18 @@
 <text x="601" y="596" fill="#8aa2b9" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="start">Critical</text>
 </g>
 <g id="05-telemetry-log">
-<rect x="254" y="620" width="731" height="233" rx="8" fill="#0c1b2a" stroke="#20354a" stroke-width="1"/>
+<rect x="254" y="620" width="731" height="233" rx="8" fill="#101419" stroke="#252b34" stroke-width="1"/>
 <text x="274" y="641" fill="#6f92af" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1">EVENT STREAM</text>
 <text x="274" y="663" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="start">Telemetry log</text>
-<rect x="904" y="640" width="60" height="22" rx="3" fill="#10283d" stroke="none" stroke-width="1"/>
+<rect x="904" y="640" width="60" height="22" rx="3" fill="#192331" stroke="none" stroke-width="1"/>
 <text x="934" y="655" fill="#87b5df" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="500" text-anchor="middle">6 RECORDS</text>
-<rect x="255" y="675" width="729" height="31" rx="0" fill="#102237" stroke="none" stroke-width="1"/>
+<rect x="255" y="675" width="729" height="31" rx="0" fill="#161c24" stroke="none" stroke-width="1"/>
 <text x="274" y="695" fill="#7290aa" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start" letter-spacing="0.7">TIME (UTC)</text>
 <text x="420" y="695" fill="#7290aa" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start" letter-spacing="0.7">PARAMETER</text>
 <text x="675" y="695" fill="#7290aa" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start" letter-spacing="0.7">READING</text>
 <text x="770" y="695" fill="#7290aa" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start" letter-spacing="0.7">CHANGE</text>
 <text x="866" y="695" fill="#7290aa" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start" letter-spacing="0.7">STATUS</text>
-<line x1="255" y1="707" x2="984" y2="707" stroke="#193044" stroke-width="1"/>
+<line x1="255" y1="707" x2="984" y2="707" stroke="#222d38" stroke-width="1"/>
 <text x="274" y="736" fill="#afc5dc" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="500" text-anchor="start">14:25:00</text>
 <text x="420" y="736" fill="#83afe1" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="500" text-anchor="start">battery_level_percent</text>
 <text x="675" y="736" fill="#c7d8eb" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="600" text-anchor="start">78 %</text>
@@ -162,7 +162,7 @@
 <rect x="866" y="719" width="71" height="21" rx="3" fill="#123b35" stroke="#2d7760" stroke-width="1"/>
 <circle cx="876" cy="729" r="3" fill="#63e6ab" stroke="none"/>
 <text x="885" y="732" fill="#63e6ab" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start">Nominal</text>
-<line x1="255" y1="755" x2="984" y2="755" stroke="#193044" stroke-width="1"/>
+<line x1="255" y1="755" x2="984" y2="755" stroke="#222d38" stroke-width="1"/>
 <text x="274" y="784" fill="#afc5dc" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="500" text-anchor="start">14:20:00</text>
 <text x="420" y="784" fill="#83afe1" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="500" text-anchor="start">battery_level_percent</text>
 <text x="675" y="784" fill="#c7d8eb" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="600" text-anchor="start">80 %</text>
@@ -170,7 +170,7 @@
 <rect x="866" y="767" width="71" height="21" rx="3" fill="#123b35" stroke="#2d7760" stroke-width="1"/>
 <circle cx="876" cy="777" r="3" fill="#63e6ab" stroke="none"/>
 <text x="885" y="780" fill="#63e6ab" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start">Nominal</text>
-<line x1="255" y1="803" x2="984" y2="803" stroke="#193044" stroke-width="1"/>
+<line x1="255" y1="803" x2="984" y2="803" stroke="#222d38" stroke-width="1"/>
 <text x="274" y="832" fill="#afc5dc" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="500" text-anchor="start">14:15:00</text>
 <text x="420" y="832" fill="#83afe1" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="500" text-anchor="start">battery_level_percent</text>
 <text x="675" y="832" fill="#c7d8eb" font-family="IBM Plex Mono, Consolas, monospace" font-size="10" font-weight="600" text-anchor="start">82 %</text>
@@ -180,13 +180,13 @@
 <text x="885" y="828" fill="#63e6ab" font-family="IBM Plex Mono, Consolas, monospace" font-size="8" font-weight="600" text-anchor="start">Nominal</text>
 </g>
 <g id="06-alerts-rail">
-<rect x="1000" y="68" width="440" height="801" rx="0" fill="#0a1827" stroke="none" stroke-width="1"/>
-<line x1="1000" y1="68" x2="1000" y2="869" stroke="#20354a" stroke-width="1"/>
+<rect x="1000" y="68" width="440" height="801" rx="0" fill="#0e1217" stroke="none" stroke-width="1"/>
+<line x1="1000" y1="68" x2="1000" y2="869" stroke="#252b34" stroke-width="1"/>
 <text x="1022" y="98" fill="#7192b1" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1">MISSION CONTROL</text>
 <text x="1022" y="121" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="16" font-weight="700" text-anchor="start">System status</text>
-<rect x="1373" y="86" width="38" height="38" rx="8" fill="#13324e" stroke="#2b5578" stroke-width="1"/>
+<rect x="1373" y="86" width="38" height="38" rx="8" fill="#1a2838" stroke="#34506b" stroke-width="1"/>
 <text x="1392" y="111" fill="#7cb6ee" font-family="DM Sans, Arial, sans-serif" font-size="23" font-weight="500" text-anchor="middle">⌾</text>
-<rect x="1022" y="142" width="390" height="104" rx="7" fill="#163654" stroke="#2b5475" stroke-width="1"/>
+<rect x="1022" y="142" width="390" height="104" rx="7" fill="#1a2735" stroke="#334e65" stroke-width="1"/>
 <circle cx="1042" cy="164" r="4" fill="#f5bf5f" stroke="none"/>
 <text x="1054" y="168" fill="#94bfe7" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="0.7">ATTENTION REQUIRED</text>
 <text x="1040" y="204" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="19" font-weight="700" text-anchor="start">3 signals flagged</text>
@@ -211,10 +211,10 @@
 <text x="1400" y="517" fill="#ffd17c" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="end">Warning</text>
 <text x="1035" y="547" fill="#eaf2ff" font-family="IBM Plex Mono, Consolas, monospace" font-size="19" font-weight="600" text-anchor="start">LIMITED</text>
 <text x="1035" y="570" fill="#8f9eaa" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="start">joint_status</text>
-<rect x="1022" y="610" width="390" height="34" rx="5" fill="#142e48" stroke="#365a79" stroke-width="1"/>
+<rect x="1022" y="610" width="390" height="34" rx="5" fill="#1a2736" stroke="#365a79" stroke-width="1"/>
 <text x="1034" y="631" fill="#9dccf7" font-family="DM Sans, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="start">Open Alerts Manager</text>
 <text x="1398" y="632" fill="#9dccf7" font-family="DM Sans, Arial, sans-serif" font-size="16" font-weight="500" text-anchor="end">→</text>
-<line x1="1022" y1="667" x2="1412" y2="667" stroke="#20354a" stroke-width="1"/>
+<line x1="1022" y1="667" x2="1412" y2="667" stroke="#252b34" stroke-width="1"/>
 <text x="1022" y="691" fill="#839db5" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="1">RECENT ACTIVITY</text>
 <circle cx="1028" cy="720" r="3" fill="#ff6878" stroke="none"/>
 <text x="1040" y="722" fill="#eaf2ff" font-family="DM Sans, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="start">Motor current</text>
@@ -230,8 +230,8 @@
 <text x="1398" y="812" fill="#718ba4" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">14:25</text>
 </g>
 <g id="07-statusbar">
-<rect x="225" y="869" width="1215" height="31" rx="0" fill="#091624" stroke="none" stroke-width="1"/>
-<line x1="225" y1="869" x2="1440" y2="869" stroke="#20354a" stroke-width="1"/>
+<rect x="225" y="869" width="1215" height="31" rx="0" fill="#0b0f14" stroke="none" stroke-width="1"/>
+<line x1="225" y1="869" x2="1440" y2="869" stroke="#252b34" stroke-width="1"/>
 <circle cx="245" cy="885" r="3" fill="#39d795" stroke="none"/>
 <text x="254" y="888" fill="#93acbf" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="start">Dataset loaded / 6 samples / P2-TRANSPORT-01</text>
 <text x="1420" y="888" fill="#93acbf" font-family="IBM Plex Mono, Consolas, monospace" font-size="9" font-weight="500" text-anchor="end">UTC  /  HUNCH 26–27</text>
