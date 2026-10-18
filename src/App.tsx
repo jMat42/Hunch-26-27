@@ -28,18 +28,19 @@ import {
   formatDate,
   formatTime,
   formatValue,
-  rovers,
-  severity,
+  rovers as configuredRovers,
   type Metric,
   type Rover,
-  type Severity,
 } from "./telemetry";
+import { createLiveRow, initialLiveRows, liveIntervalMs } from "./liveStream";
+import { processReading, type Severity } from "./processing";
 
 const labels: Record<Severity, string> = {
   good: "Nominal",
   warning: "Warning",
   critical: "Critical",
 };
+const CHART_WINDOW = 30;
 const order: Record<Severity, number> = { good: 0, warning: 1, critical: 2 };
 type AppPage = "metric" | "alerts" | "fleet";
 const pageFromHash = (): AppPage =>
@@ -89,7 +90,8 @@ function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
     observer.observe(svg);
     return () => observer.disconnect();
   }, []);
-  const values = rover.records.map((row) => row[metric.key]);
+  const chartRows = rover.records.slice(-CHART_WINDOW);
+  const values = chartRows.map((row) => row[metric.key]);
   const numeric = values.map((value) =>
     typeof value === "number"
       ? value
@@ -187,44 +189,68 @@ function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
               cx={x(i)}
               cy={y(value)}
               r="5"
-              className={`chart-point chart-point-${severity(values[i], metric)}`}
+              className={`chart-point chart-point-${processReading(values[i], metric).status}`}
             >
-              <title>{`${formatTime(rover.records[i].timestamp_utc, true)} UTC · ${formatValue(values[i], metric)} ${metric.unit} · ${labels[severity(values[i], metric)]}`}</title>
+              <title>{`${formatTime(chartRows[i].timestamp_utc, true)} UTC · ${formatValue(values[i], metric)} ${metric.unit} · ${labels[processReading(values[i], metric).status]}`}</title>
             </circle>
           </g>
         ))}
-        {[
-          0,
-          Math.floor((rover.records.length - 1) / 2),
-          rover.records.length - 1,
-        ].map((i, index) => (
-          <text
-            key={index}
-            x={x(i)}
-            y={size.height - 12}
-            textAnchor={index === 0 ? "start" : index === 2 ? "end" : "middle"}
-            className="chart-axis time-axis"
-          >
-            {formatTime(rover.records[i].timestamp_utc)}
-          </text>
-        ))}
+        {[0, Math.floor((chartRows.length - 1) / 2), chartRows.length - 1].map(
+          (i, index) => (
+            <text
+              key={index}
+              x={x(i)}
+              y={size.height - 12}
+              textAnchor={
+                index === 0 ? "start" : index === 2 ? "end" : "middle"
+              }
+              className="chart-axis time-axis"
+            >
+              {formatTime(chartRows[i].timestamp_utc)}
+            </text>
+          ),
+        )}
       </svg>
     </div>
   );
 }
 
-function MetricPage({ rover, metric }: { rover: Rover; metric: Metric }) {
+function MetricPage({
+  rover,
+  metric,
+  live,
+}: {
+  rover: Rover;
+  metric: Metric;
+  live: boolean;
+}) {
   const rows = [...rover.records].reverse();
   const latest = rows[0];
   const previous = rows[1];
-  const current = latest[metric.key];
-  const level = severity(current, metric);
+  const { value: current, status: level } = processReading(
+    latest[metric.key],
+    metric,
+  );
   const numeric =
     typeof current === "number" && typeof previous[metric.key] === "number";
   const delta = numeric ? current - (previous[metric.key] as number) : 0;
   const rangeValues = rover.records
     .map((row) => row[metric.key])
     .filter((value): value is number => typeof value === "number");
+  const intervalSeconds =
+    (latest.timestamp_unix_ms - previous.timestamp_unix_ms) / 1000;
+  const intervalLabel =
+    intervalSeconds < 60
+      ? `${intervalSeconds.toFixed(0)} second`
+      : `${(intervalSeconds / 60).toFixed(0)} minute`;
+  const chartStart =
+    rover.records[Math.max(0, rover.records.length - CHART_WINDOW)];
+  const durationSeconds =
+    (latest.timestamp_unix_ms - chartStart.timestamp_unix_ms) / 1000;
+  const durationLabel =
+    durationSeconds < 60
+      ? `${durationSeconds.toFixed(0)} sec`
+      : `${(durationSeconds / 60).toFixed(0)} min`;
   return (
     <>
       <div className="page-heading">
@@ -283,8 +309,7 @@ function MetricPage({ rover, metric }: { rover: Rover; metric: Metric }) {
             )}
           </div>
           <span className="summary-caption">
-            {(latest.timestamp_unix_ms - previous.timestamp_unix_ms) / 60000}{" "}
-            minute sample interval
+            {intervalLabel} sample interval
           </span>
         </div>
         <div className="summary-card">
@@ -296,7 +321,8 @@ function MetricPage({ rover, metric }: { rover: Rover; metric: Metric }) {
             <small>{rangeValues.length ? metric.unit : ""}</small>
           </div>
           <span className="summary-caption">
-            Across {rover.records.length} recorded samples
+            Across {rover.records.length} {live ? "simulated" : "recorded"}{" "}
+            samples
           </span>
         </div>
       </div>
@@ -307,10 +333,8 @@ function MetricPage({ rover, metric }: { rover: Rover; metric: Metric }) {
             <h2>{metric.title} over time</h2>
           </div>
           <span className="panel-pill">
-            <span className="tiny-blue-dot" /> Recorded ·{" "}
-            {(latest.timestamp_unix_ms - rover.records[0].timestamp_unix_ms) /
-              60000}{" "}
-            min
+            <span className="tiny-blue-dot" />{" "}
+            {live ? "Live simulation" : "Recorded"} · {durationLabel}
           </span>
         </div>
         <MetricChart rover={rover} metric={metric} />
@@ -350,9 +374,11 @@ function MetricPage({ rover, metric }: { rover: Rover; metric: Metric }) {
             </thead>
             <tbody>
               {rows.map((row, index) => {
-                const value = row[metric.key];
+                const { value, status: state } = processReading(
+                  row[metric.key],
+                  metric,
+                );
                 const prior = rows[index + 1]?.[metric.key];
-                const state = severity(value, metric);
                 const change =
                   typeof value === "number" && typeof prior === "number"
                     ? `${value - prior > 0 ? "+" : ""}${(value - prior).toFixed(metric.key === "battery_level_percent" ? 0 : 1)}`
@@ -456,8 +482,8 @@ function AlertsManager({ rover }: { rover: Rover }) {
               {
                 rover.metrics.filter(
                   (metric) =>
-                    severity(rover.records.at(-1)![metric.key], metric) ===
-                    "good",
+                    processReading(rover.records.at(-1)![metric.key], metric)
+                      .status === "good",
                 ).length
               }
             </strong>
@@ -540,18 +566,19 @@ function AlertsManager({ rover }: { rover: Rover }) {
 function RightRail({
   rover,
   onAlerts,
+  live,
 }: {
   rover: Rover;
   onAlerts: () => void;
+  live: boolean;
 }) {
   const events = alertEvents(rover);
   const latest = rover.records.at(-1)!;
   const active = rover.metrics
-    .map((metric) => ({
-      metric,
-      value: latest[metric.key],
-      level: severity(latest[metric.key], metric),
-    }))
+    .map((metric) => {
+      const processed = processReading(latest[metric.key], metric);
+      return { metric, value: processed.value, level: processed.status };
+    })
     .filter((item) => item.level !== "good")
     .sort((a, b) => order[b.level] - order[a.level]);
   return (
@@ -576,7 +603,8 @@ function RightRail({
             : "Telemetry stable"}
         </strong>
         <p>
-          Latest recorded sample · {formatTime(latest.timestamp_utc, true)} UTC
+          Latest {live ? "simulated" : "recorded"} sample ·{" "}
+          {formatTime(latest.timestamp_utc, true)} UTC
         </p>
       </div>
       <div className="rail-section-title">
@@ -638,7 +666,13 @@ function RightRail({
   );
 }
 
-function FleetPage({ onSelect }: { onSelect: (rover: Rover) => void }) {
+function FleetPage({
+  onSelect,
+  rovers,
+}: {
+  onSelect: (rover: Rover) => void;
+  rovers: Rover[];
+}) {
   return (
     <>
       <div className="page-heading fleet-heading">
@@ -658,7 +692,7 @@ function FleetPage({ onSelect }: { onSelect: (rover: Rover) => void }) {
           <strong>Garage workspace</strong>
           <span>
             Vehicle models and repair tracking will live here. Current cards
-            show recorded telemetry only.
+            show telemetry data and current processed conditions.
           </span>
         </div>
       </div>
@@ -666,7 +700,7 @@ function FleetPage({ onSelect }: { onSelect: (rover: Rover) => void }) {
         {rovers.map((item, index) => {
           const latest = item.records.at(-1)!;
           const level = item.metrics.reduce<Severity>((highest, metric) => {
-            const next = severity(latest[metric.key], metric);
+            const next = processReading(latest[metric.key], metric).status;
             return order[next] > order[highest] ? next : highest;
           }, "good");
           return (
@@ -791,8 +825,28 @@ function FleetPage({ onSelect }: { onSelect: (rover: Rover) => void }) {
 }
 
 export default function App() {
-  const [roverId, setRoverId] = useState(rovers[0].id);
-  const [metricKey, setMetricKey] = useState(rovers[0].metrics[0].key);
+  const [roverId, setRoverId] = useState(configuredRovers[0].id);
+  const [metricKey, setMetricKey] = useState(
+    configuredRovers[0].metrics[0].key,
+  );
+  const [sourceMode, setSourceMode] = useState<"live" | "recorded">("live");
+  const [liveRows, setLiveRows] = useState(() => initialLiveRows(Date.now()));
+  useEffect(() => {
+    if (sourceMode !== "live") return;
+    const timer = window.setInterval(() => {
+      setLiveRows((rows) => [...rows, createLiveRow(rows.length, Date.now())]);
+    }, liveIntervalMs);
+    return () => window.clearInterval(timer);
+  }, [sourceMode]);
+  const rovers = useMemo(
+    () =>
+      configuredRovers.map((item) =>
+        item.id === "P2-TRANSPORT-01" && sourceMode === "live"
+          ? { ...item, records: liveRows, source: "Simulated live stream" }
+          : item,
+      ),
+    [liveRows, sourceMode],
+  );
   const [page, setPage] = useState<AppPage>(pageFromHash);
   useEffect(() => {
     const syncPage = () => setPage(pageFromHash());
@@ -805,12 +859,15 @@ export default function App() {
   };
   const [navOpen, setNavOpen] = useState(false);
   const rover = rovers.find((item) => item.id === roverId)!;
+  const isLive = rover.id === "P2-TRANSPORT-01" && sourceMode === "live";
   const metric =
     rover.metrics.find((item) => item.key === metricKey) ?? rover.metrics[0];
   const flagged = useMemo(
     () =>
       rover.metrics.filter(
-        (item) => severity(rover.records.at(-1)![item.key], item) !== "good",
+        (item) =>
+          processReading(rover.records.at(-1)![item.key], item).status !==
+          "good",
       ).length,
     [rover],
   );
@@ -867,7 +924,7 @@ export default function App() {
           {rover.metrics.map((item) => {
             const selected = page === "metric" && metric.key === item.key;
             const latest = rover.records.at(-1)![item.key];
-            const level = severity(latest, item);
+            const level = processReading(latest, item).status;
             return (
               <button
                 key={item.key}
@@ -904,14 +961,19 @@ export default function App() {
             <Radio size={16} />
           </span>
           <div>
-            <strong>Recorded telemetry</strong>
+            <strong>
+              {isLive ? "Simulated live telemetry" : "Recorded telemetry"}
+            </strong>
             <small>
-              Demo session · {formatDate(rover.records[0].timestamp_utc)}
+              {isLive
+                ? `New sample every ${liveIntervalMs / 1000} sec`
+                : `Demo session · ${formatDate(rover.records[0].timestamp_utc)}`}
             </small>
           </div>
         </div>
         <div className="sidebar-footer">
-          <span className="connection-dot" /> DATASET LOADED{" "}
+          <span className="connection-dot" />{" "}
+          {isLive ? "SIMULATOR RUNNING" : "DATASET LOADED"}{" "}
           <span className="footer-version">v0.1</span>
         </div>
       </aside>
@@ -950,9 +1012,28 @@ export default function App() {
             ))}
           </div>
           <div className="topbar-right">
-            <span className="session-badge">
-              <span /> RECORDED SESSION
-            </span>
+            {rover.id === "P2-TRANSPORT-01" ? (
+              <button
+                className={`session-badge session-toggle ${isLive ? "session-live" : ""}`}
+                onClick={() => setSourceMode(isLive ? "recorded" : "live")}
+                aria-label={
+                  isLive
+                    ? "Switch to recorded telemetry"
+                    : "Switch to live simulation"
+                }
+                title={
+                  isLive
+                    ? "Show original Mission 1 readings"
+                    : "Show simulated streaming readings"
+                }
+              >
+                <span /> {isLive ? "LIVE SIMULATION" : "RECORDED SESSION"}
+              </button>
+            ) : (
+              <span className="session-badge">
+                <span /> RECORDED DEMO
+              </span>
+            )}
             <span className="topbar-time">
               {formatDate(rover.records.at(-1)!.timestamp_utc)} ·{" "}
               {formatTime(rover.records.at(-1)!.timestamp_utc)} UTC
@@ -974,21 +1055,26 @@ export default function App() {
             </div>
             <div className="main-inner">
               {page === "fleet" ? (
-                <FleetPage onSelect={selectRover} />
+                <FleetPage onSelect={selectRover} rovers={rovers} />
               ) : page === "metric" ? (
-                <MetricPage rover={rover} metric={metric} />
+                <MetricPage rover={rover} metric={metric} live={isLive} />
               ) : (
                 <AlertsManager rover={rover} />
               )}
             </div>
           </main>
           {page !== "fleet" && (
-            <RightRail rover={rover} onAlerts={() => navigate("alerts")} />
+            <RightRail
+              rover={rover}
+              onAlerts={() => navigate("alerts")}
+              live={isLive}
+            />
           )}
         </div>
         <footer className="statusbar">
           <span>
-            <span className="connection-dot" /> Dataset loaded{" "}
+            <span className="connection-dot" />{" "}
+            {isLive ? "Simulator running" : "Dataset loaded"}{" "}
             <span className="statusbar-muted">
               / {rover.records.length} samples / {rover.id}
             </span>

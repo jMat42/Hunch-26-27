@@ -13,3 +13,7 @@ This folder contains six synthetic records for `P2-TRANSPORT-01`. They cover the
 ## Important limits
 
 The telemetry readings, APID, packet layout, XTCE document, and any future health thresholds are PDR demonstration choices—not NASA-provided flight requirements or a complete CCSDS/XTCE implementation. Keep threshold rules in a separate configuration file when you write Mission 1.
+
+## Separate live simulation
+
+The frontend also has `src/data/transport-live-stream.json`, a separate raw sample sequence for Transport 01. Its `streams` object has equal-length arrays for battery level, motor current, motor temperature, wheel speed, and joint status. `sample_interval_ms` controls browser replay timing. The file contains no health labels. `src/liveStream.ts` attaches current UTC timestamps as the sequence plays; `src/processing.ts` applies the demo rules from `src/thresholds.ts` and returns the status used by the display. The original six records and other formats above remain unchanged.

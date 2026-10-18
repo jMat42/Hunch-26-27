@@ -16,11 +16,13 @@ The JSON/CSV row schema is `robot_id` (string), `timestamp_utc` (ISO 8601 UTC st
 
 ## Frontend data boundary
 
-`src/telemetry.ts` adapts records to rover and metric definitions. Pages, units, labels, and alert rules live in the metric configuration rather than in chart or table components. To add a real rover, supply normalized records with its `robot_id` and timestamps, then define its metrics and units. A new field can be shown by adding a metric definition; the current demo does not invent a motor voltage reading.
+`src/telemetry.ts` adapts records to rover and metric definitions. Pages, units, and labels live in the metric configuration; alert cutoffs live in `src/thresholds.ts` and are evaluated by `src/processing.ts`, rather than in chart or table components. To add a real rover, supply normalized records with its `robot_id` and timestamps, then define its metrics and units. A new field can be shown by adding a metric definition; the current demo does not invent a motor voltage reading.
 
-The transport dashboard uses the source JSON directly. Its alert cutoffs reproduce `main.py`: battery warning below 65%, critical below 40%; motor current warning above 3 A, critical above 4 A; motor temperature warning above 60 °C, critical above 80 °C; wheel speed warning below 70 RPM, critical below 40 RPM; joint `LIMITED` is warning and `FAILED` is critical. The XTCE enum uses `FAULT`; the frontend also treats `FAULT` as critical. Keep any future operational thresholds in separate configuration and get them reviewed before using them as flight rules.
+The transport dashboard's recorded mode uses the source JSON directly. Its alert cutoffs in `src/thresholds.ts` reproduce `main.py`: battery warning below 65%, critical below 40%; motor current warning above 3 A, critical above 4 A; motor temperature warning above 60 °C, critical above 80 °C; wheel speed warning below 70 RPM, critical below 40 RPM; joint `LIMITED` is warning and `FAILED` is critical. The XTCE enum uses `FAULT`; the frontend also treats `FAULT` as critical. Keep any future operational thresholds in separate configuration and get them reviewed before using them as flight rules.
 
 `src/data/survey-demo.json` is a clearly labeled, additional UI-only sample for testing rover switching and differing schemas. It does not replace or modify any of the original telemetry.
+
+`src/data/transport-live-stream.json` is a separate browser simulation for Transport 01. It has `robot_id`, `sample_interval_ms`, and five equally long arrays under `streams`: `battery_level_percent`, `motor_current_amps`, `motor_temperature_c`, `wheel_speed_rpm`, and `joint_status`. Keep these arrays raw: no `good`, `warning`, `critical`, or other processed health fields. `src/liveStream.ts` loops the aligned values and timestamps new samples at runtime. `src/thresholds.ts` holds the editable demo cutoffs, and `src/processing.ts` evaluates them outside the raw file and returns a value plus status to the frontend. Preserve the same strict numeric cutoffs and joint enum matches described above. The top-bar mode button exposes the original recorded data without changing it.
 
 ## Design and handoff
 

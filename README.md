@@ -1,6 +1,6 @@
 # HUNCH lunar telemetry dashboard
 
-Dark-mode frontend for the synthetic Mission 1 telemetry. The transport rover reads the existing JSON records without modifying any source files. Survey 02 is an additional UI demo used to exercise the rover tabs and a different telemetry schema.
+Dark-mode frontend for synthetic Mission 1 telemetry. Transport 01 opens in a simulated live mode, with a button in the top bar to switch to the untouched six original Mission 1 readings. Survey 02 remains an additional recorded UI demo for rover switching and a different telemetry schema.
 
 ## Run
 
@@ -11,19 +11,20 @@ npm run dev
 
 Build with `npm run build`.
 
-The left sidebar switches telemetry pages, the top tabs switch rovers, and the Alerts Manager collects recorded warning and critical readings. Each telemetry page has a chart, latest reading, and full change log. Export CSV downloads the selected page's displayed signal. The Rover Fleet button opens a garage overview with model placeholders and links back to each rover's telemetry. Garage repair states and real 3D models are not configured yet.
+The left sidebar switches telemetry pages, the top tabs switch rovers, and the Alerts Manager collects processed warning and critical readings. Each telemetry page has a chart, latest reading, and full change log. Export CSV downloads the selected page's displayed signal. The Rover Fleet button opens a garage overview with model placeholders and links back to each rover's telemetry. Garage repair states and real 3D models are not configured yet.
 
-## Why the readings do not update live
+## Simulated live telemetry
 
-- `src/telemetry.ts` imports two bundled JSON files at build time. Both contain six fixed readings dated 11 October 2026.
-- The frontend has no telemetry API, WebSocket, server-sent event stream, or polling loop. Its React state only changes the selected rover, page, and local alert acknowledgments.
-- `main.py` reads a CSV file for a command-line demonstration; it does not serve data to this frontend. Its current `data/simulated_mission1_telemetry.csv` path also does not match the CSV's location in this repo.
+- `src/data/transport-live-stream.json` contains five aligned raw value streams: `battery_level_percent`, `motor_current_amps`, `motor_temperature_c`, `wheel_speed_rpm`, and `joint_status`. It has a `robot_id` and `sample_interval_ms`, but no health labels.
+- `src/liveStream.ts` replays those values in sequence, attaches a current UTC timestamp to each combined sample, and loops the source sequence. The frontend appends a sample every two seconds while live mode is selected. The chart shows the most recent 30 samples; the log, alerts, and CSV export retain the full simulated session.
+- `src/processing.ts` assigns `good`, `warning`, or `critical` after reading each raw value. Numeric rules use strict `<` and `>` comparisons; joint states use exact enum matches. The rule values live in `src/thresholds.ts`, outside the raw file. Critical takes precedence over warning. These are the same demo thresholds as the original dashboard and `main.py`.
+- The top bar button pauses the simulator and shows the original recorded readings. Switching back resumes the simulation. Survey 02 always shows its separate recorded demo data.
 
-To go live later, add a source adapter that ingests timestamped samples per `robot_id`, updates the frontend record state, and handles reconnects, stale-data warnings, and history retention. Do not append artificial samples to the original Mission 1 files.
+This is a browser-side replay of bundled values, not a connection to rover hardware. A real source adapter can later replace `src/liveStream.ts` while keeping raw readings and processing separate. It will need reconnect handling, stale-data indication, and history retention. `main.py` is a separate CSV command-line demo and does not feed the frontend.
 
 ## Figma
 
-Import `design/rover-dashboard.svg`, `design/alerts-manager.svg`, and `design/rover-fleet.svg` into a Figma design file for editable vector layouts. Their groups, shapes, lines, and text are kept separate. The live frontend is in `src/`; the SVG frames are handoff artifacts rather than synced source files.
+Import `design/rover-dashboard.svg`, `design/alerts-manager.svg`, and `design/rover-fleet.svg` into a Figma design file for editable vector layouts. Their groups, shapes, lines, and text are kept separate. The dashboard design frame depicts the recorded mode. The interactive frontend is in `src/`; the SVG frames are handoff artifacts rather than synced source files.
 
 To regenerate the design frames, run `python design/build_figma_frame.py` first, then `python design/build_alerts_frame.py` and `python design/build_fleet_frame.py`.
 

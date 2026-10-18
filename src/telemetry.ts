@@ -1,13 +1,14 @@
 import transportData from "../simulated_mission1_telemetry.json";
 import surveyData from "./data/survey-demo.json";
+import { processReading, type ProcessingRules } from "./processing";
+import { surveyRules, transportRules } from "./thresholds";
 
-export type Severity = "good" | "warning" | "critical";
 export type TelemetryRow = Record<string, string | number> & {
   robot_id: string;
   timestamp_utc: string;
   timestamp_unix_ms: number;
 };
-export type Metric = {
+export type Metric = ProcessingRules & {
   key: string;
   title: string;
   short: string;
@@ -15,8 +16,6 @@ export type Metric = {
   domain: string;
   description: string;
   type?: "enum";
-  warning?: { below?: number; above?: number; equals?: string[] };
-  critical?: { below?: number; above?: number; equals?: string[] };
 };
 export type Rover = {
   id: string;
@@ -44,8 +43,7 @@ export const rovers: Rover[] = [
         unit: "%",
         domain: "Power system",
         description: "Remaining battery charge",
-        warning: { below: 65 },
-        critical: { below: 40 },
+        ...transportRules.battery_level_percent,
       },
       {
         key: "motor_current_amps",
@@ -54,8 +52,7 @@ export const rovers: Rover[] = [
         unit: "A",
         domain: "Drive system",
         description: "Current draw at the drive motor",
-        warning: { above: 3 },
-        critical: { above: 4 },
+        ...transportRules.motor_current_amps,
       },
       {
         key: "motor_temperature_c",
@@ -64,8 +61,7 @@ export const rovers: Rover[] = [
         unit: "°C",
         domain: "Thermal system",
         description: "Drive motor housing temperature",
-        warning: { above: 60 },
-        critical: { above: 80 },
+        ...transportRules.motor_temperature_c,
       },
       {
         key: "wheel_speed_rpm",
@@ -74,8 +70,7 @@ export const rovers: Rover[] = [
         unit: "RPM",
         domain: "Drive system",
         description: "Wheel rotation rate",
-        warning: { below: 70 },
-        critical: { below: 40 },
+        ...transportRules.wheel_speed_rpm,
       },
       {
         key: "joint_status",
@@ -85,8 +80,7 @@ export const rovers: Rover[] = [
         domain: "Mobility system",
         description: "Articulation joint operating state",
         type: "enum",
-        warning: { equals: ["LIMITED"] },
-        critical: { equals: ["FAILED", "FAULT"] },
+        ...transportRules.joint_status,
       },
     ],
   },
@@ -104,8 +98,7 @@ export const rovers: Rover[] = [
         unit: "V",
         domain: "Power system",
         description: "Solar bus output voltage",
-        warning: { below: 26.8 },
-        critical: { below: 25.5 },
+        ...surveyRules.solar_bus_voltage_v,
       },
       {
         key: "camera_temperature_c",
@@ -114,8 +107,7 @@ export const rovers: Rover[] = [
         unit: "°C",
         domain: "Imaging system",
         description: "Camera body temperature",
-        warning: { above: 24 },
-        critical: { above: 30 },
+        ...surveyRules.camera_temperature_c,
       },
       {
         key: "traction_slip_percent",
@@ -124,8 +116,7 @@ export const rovers: Rover[] = [
         unit: "%",
         domain: "Mobility system",
         description: "Estimated wheel slip",
-        warning: { above: 6 },
-        critical: { above: 10 },
+        ...surveyRules.traction_slip_percent,
       },
       {
         key: "drive_mode",
@@ -135,28 +126,11 @@ export const rovers: Rover[] = [
         domain: "Mobility system",
         description: "Current mobility controller mode",
         type: "enum",
-        warning: { equals: ["CAUTION"] },
-        critical: { equals: ["STOP", "FAULT"] },
+        ...surveyRules.drive_mode,
       },
     ],
   },
 ];
-
-function matches(value: string | number, rule?: Metric["warning"]): boolean {
-  if (!rule) return false;
-  return (
-    (typeof value === "number" &&
-      ((rule.below !== undefined && value < rule.below) ||
-        (rule.above !== undefined && value > rule.above))) ||
-    (typeof value === "string" && !!rule.equals?.includes(value.toUpperCase()))
-  );
-}
-
-export function severity(value: string | number, metric: Metric): Severity {
-  if (matches(value, metric.critical)) return "critical";
-  if (matches(value, metric.warning)) return "warning";
-  return "good";
-}
 
 export function formatValue(value: string | number, metric: Metric): string {
   if (typeof value === "string") return value;
@@ -192,7 +166,8 @@ export function alertEvents(rover: Rover) {
       rover.metrics.flatMap((metric) => {
         const value = row[metric.key];
         if (value === undefined) return [];
-        const level = severity(value, metric);
+        const processed = processReading(value, metric);
+        const level = processed.status;
         return level === "good"
           ? []
           : [
@@ -201,7 +176,7 @@ export function alertEvents(rover: Rover) {
                 rover,
                 metric,
                 row,
-                value,
+                value: processed.value,
                 level,
               },
             ];
@@ -222,7 +197,7 @@ export function downloadMetricCsv(rover: Rover, metric: Metric) {
         metric.key,
         row[metric.key],
         metric.unit,
-        severity(row[metric.key], metric),
+        processReading(row[metric.key], metric).status,
       ]
         .map(escape)
         .join(","),

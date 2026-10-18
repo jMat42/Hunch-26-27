@@ -417,6 +417,24 @@ button:disabled {
   border-radius: 50%;
   margin-right: 6px;
 }
+.session-toggle {
+  cursor: pointer;
+}
+.session-toggle:hover {
+  background: #22374b;
+}
+.session-live {
+  color: #92c7ff;
+  background: #14273a;
+  border-color: #3e709f;
+}
+.session-live span {
+  background: #65b1ff;
+  box-shadow: 0 0 0 3px #65b1ff24;
+}
+.session-live:hover {
+  background: #1b334a;
+}
 .topbar-time {
   color: #8095ab;
   font:
@@ -1579,6 +1597,11 @@ tbody tr:hover {
   .statusbar-right,
   .session-badge {
     display: none;
+  }
+  .session-toggle {
+    display: block;
+    font-size: 8px;
+    padding: 7px;
   }
   .topbar-title {
     font-size: 9px;
