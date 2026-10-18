@@ -1,0 +1,56 @@
+[
+  {
+    "robot_id": "P2-SURVEY-02",
+    "timestamp_utc": "2026-10-11T14:00:00Z",
+    "timestamp_unix_ms": 1791727200000,
+    "solar_bus_voltage_v": 27.8,
+    "camera_temperature_c": 18.2,
+    "traction_slip_percent": 2.1,
+    "drive_mode": "TRAVERSE"
+  },
+  {
+    "robot_id": "P2-SURVEY-02",
+    "timestamp_utc": "2026-10-11T14:05:00Z",
+    "timestamp_unix_ms": 1791727500000,
+    "solar_bus_voltage_v": 27.6,
+    "camera_temperature_c": 18.9,
+    "traction_slip_percent": 2.4,
+    "drive_mode": "TRAVERSE"
+  },
+  {
+    "robot_id": "P2-SURVEY-02",
+    "timestamp_utc": "2026-10-11T14:10:00Z",
+    "timestamp_unix_ms": 1791727800000,
+    "solar_bus_voltage_v": 27.4,
+    "camera_temperature_c": 19.7,
+    "traction_slip_percent": 3.2,
+    "drive_mode": "TRAVERSE"
+  },
+  {
+    "robot_id": "P2-SURVEY-02",
+    "timestamp_utc": "2026-10-11T14:15:00Z",
+    "timestamp_unix_ms": 1791728100000,
+    "solar_bus_voltage_v": 27.1,
+    "camera_temperature_c": 20.3,
+    "traction_slip_percent": 4.0,
+    "drive_mode": "TRAVERSE"
+  },
+  {
+    "robot_id": "P2-SURVEY-02",
+    "timestamp_utc": "2026-10-11T14:20:00Z",
+    "timestamp_unix_ms": 1791728400000,
+    "solar_bus_voltage_v": 26.8,
+    "camera_temperature_c": 21.5,
+    "traction_slip_percent": 6.1,
+    "drive_mode": "TRAVERSE"
+  },
+  {
+    "robot_id": "P2-SURVEY-02",
+    "timestamp_utc": "2026-10-11T14:25:00Z",
+    "timestamp_unix_ms": 1791728700000,
+    "solar_bus_voltage_v": 26.5,
+    "camera_temperature_c": 22.4,
+    "traction_slip_percent": 9.2,
+    "drive_mode": "CAUTION"
+  }
+]
