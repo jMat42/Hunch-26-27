@@ -26,4 +26,4 @@ The transport dashboard uses the source JSON directly. Its alert cutoffs reprodu
 
 Use `C:/Users/matth/projects/ULA-GS` for the dashboard layout reference: left telemetry page rail, chart card, event log, right alerts rail, and restrained mission-control styling. Use cooler blue surfaces for this project; green means nominal, yellow warning, and red critical. Dark mode is the initial theme.
 
-Keep `design/rover-dashboard.svg` as an editable, layered vector handoff for Figma. Update it when the main dashboard design materially changes. The SVG is a design frame, while the React frontend is the interactive implementation.
+Keep `design/rover-dashboard.svg` and `design/alerts-manager.svg` as editable, layered vector handoffs for Figma. Update them when either screen materially changes. The SVGs are design frames, while the React frontend is the interactive implementation.

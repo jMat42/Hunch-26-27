@@ -15,6 +15,8 @@ The left sidebar switches telemetry pages, the top tabs switch rovers, and the A
 
 ## Figma
 
-Import `design/rover-dashboard.svg` into a Figma design file for an editable vector layout. Its groups, shapes, lines, and text are kept separate. The live frontend is in `src/`; the Figma design is a handoff artifact rather than a synced source file. The Figma plugin can transfer the live screen into a Figma project once connected in Codex.
+Import `design/rover-dashboard.svg` and `design/alerts-manager.svg` into a Figma design file for editable vector layouts. Their groups, shapes, lines, and text are kept separate. The live frontend is in `src/`; the Figma design frames are handoff artifacts rather than synced source files. The Figma plugin can transfer live screens into a Figma project once connected in Codex.
+
+To regenerate both design frames, run `python design/build_figma_frame.py` followed by `python design/build_alerts_frame.py`.
 
 See `README_Telemetry.md` and `AGENTS.md` for source formats and demo threshold notes.
