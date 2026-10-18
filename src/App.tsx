@@ -92,6 +92,13 @@ function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
   }, []);
   const chartRows = rover.records.slice(-CHART_WINDOW);
   const values = chartRows.map((row) => row[metric.key]);
+  const axisIndices =
+    chartRows.length < 3
+      ? [0, chartRows.length - 1]
+      : [0, Math.floor((chartRows.length - 1) / 2), chartRows.length - 1];
+  const axisShowsSeconds =
+    chartRows.at(-1)!.timestamp_unix_ms - chartRows[0].timestamp_unix_ms <
+    120_000;
   const numeric = values.map((value) =>
     typeof value === "number"
       ? value
@@ -195,21 +202,23 @@ function MetricChart({ rover, metric }: { rover: Rover; metric: Metric }) {
             </circle>
           </g>
         ))}
-        {[0, Math.floor((chartRows.length - 1) / 2), chartRows.length - 1].map(
-          (i, index) => (
-            <text
-              key={index}
-              x={x(i)}
-              y={size.height - 12}
-              textAnchor={
-                index === 0 ? "start" : index === 2 ? "end" : "middle"
-              }
-              className="chart-axis time-axis"
-            >
-              {formatTime(chartRows[i].timestamp_utc)}
-            </text>
-          ),
-        )}
+        {axisIndices.map((i, index) => (
+          <text
+            key={index}
+            x={x(i)}
+            y={size.height - 12}
+            textAnchor={
+              index === 0
+                ? "start"
+                : index === axisIndices.length - 1
+                  ? "end"
+                  : "middle"
+            }
+            className="chart-axis time-axis"
+          >
+            {formatTime(chartRows[i].timestamp_utc, axisShowsSeconds)}
+          </text>
+        ))}
       </svg>
     </div>
   );

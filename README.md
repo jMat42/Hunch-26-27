@@ -24,7 +24,7 @@ This is a browser-side replay of bundled values, not a connection to rover hardw
 
 ## Figma
 
-Import `design/rover-dashboard.svg`, `design/alerts-manager.svg`, and `design/rover-fleet.svg` into a Figma design file for editable vector layouts. Their groups, shapes, lines, and text are kept separate. The dashboard design frame depicts the recorded mode. The interactive frontend is in `src/`; the SVG frames are handoff artifacts rather than synced source files.
+The [HUNCH Lunar Rover Telemetry Figma file](https://www.figma.com/design/ypX7gCznwRb0RIiraEct9Y) contains editable text and frame layers for the live dashboard, recorded Alerts Manager, and Rover Fleet. These are static design snapshots with raw frames rather than reusable design system components. The `design/rover-dashboard.svg`, `design/alerts-manager.svg`, and `design/rover-fleet.svg` files are separate editable vector handoffs; the dashboard SVG depicts recorded mode. The interactive frontend is in `src/`.
 
 To regenerate the design frames, run `python design/build_figma_frame.py` first, then `python design/build_alerts_frame.py` and `python design/build_fleet_frame.py`.
 
